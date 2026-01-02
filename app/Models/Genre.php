@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Genre extends Model
+{
+    protected $fillable = [
+        'tmdb_id',
+        'name',
+    ];
+    
+    protected $casts = [
+        'tmdb_id' => 'integer',
+        'name' => 'string'
+    ];
+    
+}
+
+?>
