@@ -34,7 +34,7 @@ class AuthController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.dashboard');
     }
 }
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Genres</title>
     @vite(['resources/css/app.css'])
-    
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- DataTables CSS -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
 	
@@ -30,107 +30,12 @@
 <div class="flex min-h-screen">
 
     <!-- Sidebar -->
-    <aside class="w-48 shrink-0 bg-white border-r border-slate-200 flex flex-col">
-    
-        <!-- Scroll container -->
-        <div class="flex-1 overflow-y-auto px-3 py-6 text-[15px] leading-6 break-words">
-
-    
-            <!-- Top navigation -->
-            <nav class="space-y-1 mb-8">
-                <a href="/admin/" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-900 font-medium">
-                    <!-- icon -->
-                    <svg class="h-5 w-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path d="M12 6l-2 4h4l-2 4" />
-                    </svg>
-                    Movies AI
-                </a>
-    
-                <a href="/admin/" class="group inline-flex items-center gap-3 text-base/8 text-gray-600 sm:text-sm/7 dark:text-gray-300 **:data-outline:stroke-gray-400 dark:**:data-outline:stroke-gray-500 **:[svg]:first:size-5 **:[svg]:first:sm:size-4 hover:text-gray-950 hover:**:data-highlight:fill-gray-300 hover:**:data-outline:stroke-gray-950 dark:hover:text-white dark:hover:**:data-highlight:fill-gray-600 dark:hover:**:data-outline:stroke-white aria-[current]:font-semibold aria-[current]:text-gray-950 aria-[current]:**:data-highlight:fill-gray-300 aria-[current]:**:data-outline:stroke-gray-950 dark:aria-[current]:text-white dark:aria-[current]:**:data-highlight:fill-gray-600 dark:aria-[current]:**:data-outline:stroke-white">
-    				&nbsp;<svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 20">
-                        <path d="M12 3l9 5-9 5-9-5 9-5z" />
-                    </svg>
-    				Movies
-    			</a>
-    			
-    			<br />
-    			
-    			<a href="/admin/genres/" class="group inline-flex items-center gap-3 text-base/8 text-gray-600 sm:text-sm/7 dark:text-gray-300 **:data-outline:stroke-gray-400 dark:**:data-outline:stroke-gray-500 **:[svg]:first:size-5 **:[svg]:first:sm:size-4 hover:text-gray-950 hover:**:data-highlight:fill-gray-300 hover:**:data-outline:stroke-gray-950 dark:hover:text-white dark:hover:**:data-highlight:fill-gray-600 dark:hover:**:data-outline:stroke-white aria-[current]:font-semibold aria-[current]:text-gray-950 aria-[current]:**:data-highlight:fill-gray-300 aria-[current]:**:data-outline:stroke-gray-950 dark:aria-[current]:text-white dark:aria-[current]:**:data-highlight:fill-gray-600 dark:aria-[current]:**:data-outline:stroke-white">
-    				&nbsp;<svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 20">
-                        <path d="M4 4h16v16H4z" />
-                    </svg>
-    				Genres
-    			</a>
-    			
-<!--                 <a href="#" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-600 hover:text-slate-900"> -->
-<!--                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"> -->
-<!--                         <path d="M4 4h16v16H4z" /> -->
-<!--                     </svg> -->
-<!--                     Templates -->
-<!--                 </a> -->
-    
-<!--                 <a href="#" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-600 hover:text-slate-900"> -->
-<!--                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"> -->
-<!--                         <path d="M12 3v18M3 12h18" /> -->
-<!--                     </svg> -->
-<!--                     UI Kit -->
-<!--                 </a> -->
-    
-<!--                 <a href="#" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-600 hover:text-slate-900"> -->
-<!--                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"> -->
-<!--                         <path d="M9 12h6" /> -->
-<!--                     </svg> -->
-<!--                     Playground -->
-<!--                 </a> -->
-    
-<!--                 <a href="#" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-600 hover:text-slate-900"> -->
-<!--                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"> -->
-<!--                         <path d="M12 14l9-5-9-5-9 5 9 5z" /> -->
-<!--                     </svg> -->
-<!--                     Course -->
-<!--                     <span class="ml-2 text-[10px] font-semibold px-1.5 py-0.5 rounded bg-sky-100 text-sky-600"> -->
-<!--                         NEW -->
-<!--                     </span> -->
-<!--                 </a> -->
-    
-<!--                 <a href="#" class="flex items-center gap-3 px-2 py-2 rounded-md text-slate-600 hover:text-slate-900"> -->
-<!--                     <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"> -->
-<!--                         <path d="M8 12h8" /> -->
-<!--                     </svg> -->
-<!--                     Community -->
-<!--                 </a> -->
-            </nav>
-    
-            <!-- Section -->
-            <div class="mt-8">
-                <div class="mb-2 px-2 text-xs font-semibold tracking-widest text-slate-400 uppercase">
-                    Account
-                </div>
-            
-                <form method="POST" action="{{ route('admin.logout') }}">
-                    @csrf
-                    <button
-                        type="submit"
-                        class="w-full text-left px-2 py-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-                        Logout
-                    </button>
-                </form>
-            </div>
-    
-            
-    
-        </div>
-    </aside>
+    @include('admin.partials.sidebar')
 
     <!-- Main Content -->
     <main class="flex-1 p-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">Genres</h1>
-
-            <button
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
-                + Add Genre
-            </button>
         </div>
 
         <!-- DataTable Container -->

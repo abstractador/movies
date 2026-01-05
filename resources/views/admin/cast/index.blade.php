@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Admin Dashboard</title>
+    <title>Cast</title>
     @vite(['resources/css/app.css'])
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- DataTables CSS -->
@@ -35,44 +35,17 @@
     <!-- Main Content -->
     <main class="flex-1 p-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">Movies</h1>
+            <h1 class="text-2xl font-bold">Cast</h1>
         </div>
-
-        <form id="filterForm" class="flex items-center gap-4 mb-4">
-            <label class="text-sm font-medium text-slate-700">
-                Genre
-            </label>
-
-            <select id="genreFilter"
-                    class="border border-slate-300 rounded-md text-sm px-3 py-2">
-                <option value="">All genres</option>
-
-                @foreach($genres as $genre)
-                    <option value="{{ $genre->tmdb_id }}">
-                        {{ $genre->name }}
-                    </option>
-                @endforeach
-            </select>
-
-            <button type="submit"
-                    class="inline-flex items-center h-9 px-4
-                        rounded-md bg-indigo-600 text-white text-sm font-medium
-                        hover:bg-indigo-700">
-                Apply
-            </button>
-
-        </form>
 
         <!-- DataTable Container -->
         <div class="bg-white rounded-xl shadow p-6">
-            <table id="moviesTable" class="w-full text-sm">
+            <table id="castTable" class="w-full text-sm">
                 <thead>
                 <tr class="text-left border-b">
                     <th class="py-3">ID</th>
-                    <th class="py-3">Title</th>
-                    <th class="py-3">Release Date</th>
-                    <th class="py-3">Rating</th>
-                    <th class="py-3 text-right">Actions</th>
+                    <th class="py-3">Name</th>
+                    <th class="py-3">Actions</th>
                 </tr>
                 </thead>
                 
@@ -95,7 +68,7 @@
            max-h-[80vh] flex flex-col">
     
         <div class="flex justify-between items-center px-4 py-3 border-b">
-            <h2 class="font-semibold text-base">Movie Details</h2>
+            <h2 class="font-semibold text-base">Cast Details</h2>
             <button id="closeViewModal"
                     class="text-slate-400 hover:text-slate-600 text-lg leading-none">
                 ×
@@ -120,7 +93,7 @@
     <div class="relative z-10 w-[28rem] max-w-[90vw] bg-white rounded-lg shadow-xl">
 
         <div class="p-5">
-            <h2 class="font-semibold text-base mb-2">Delete Movie</h2>
+            <h2 class="font-semibold text-base mb-2">Delete genre</h2>
 
             <p class="text-sm text-slate-600 mb-6">
                 Are you sure? This action cannot be undone.
@@ -164,40 +137,26 @@
 
 <script>
 $(function () {
-
-    const table = $('#moviesTable').DataTable({
+    $('#castTable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: {
-            url: '{{ route('admin.movies.data') }}',
-            data: function (d) {
-                d.genre = $('#genreFilter').val();
-            }
-        },
+        ajax: '{{ route('admin.cast.data') }}',
         pageLength: 25,
         order: [[0, 'asc']],
         columns: [
-            { data: 0, title: 'ID' },
-            { data: 1, title: 'Title' },
-            { data: 2, title: 'Release Date' },
-            { data: 3, title: 'Rating' },
-            { data: 4, title: 'Actions', orderable: false, searchable: false }
+            { title: 'ID', width: '50px'},
+            { title: 'Name' },
+            { title: 'Actions', orderable: false, searchable: false }
         ]
     });
-
-    $('#filterForm').on('submit', function (e) {
-        e.preventDefault();
-        table.ajax.reload();
-    });
-
 });
 
-$(document).on('click', '.view-movie', function (e) {
+$(document).on('click', '.view-cast', function (e) {
     e.preventDefault();
 
     const url = $(this).data('view-url');
 
-    // Move modal to body (IMPORTANT)
+    // Move modal to body
     if (!$('#viewModal').parent().is('body')) {
         $('body').append($('#viewModal'));
     }
@@ -214,7 +173,7 @@ $('#closeViewModal').on('click', function () {
     $('#viewModal').addClass('hidden');
 });
 
-$(document).on('click', '.delete-movie', function (e) {
+$(document).on('click', '.delete-cast', function (e) {
     e.preventDefault();
 
     const url = $(this).data('delete-url');

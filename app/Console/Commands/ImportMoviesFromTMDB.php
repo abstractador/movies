@@ -15,7 +15,8 @@ class ImportMoviesFromTMDB extends Command
         {--genres : Import ALL genres}
         {--credits : Import cast and crew for movies}
         {--delete-movies : DELETE ALL movies}
-        {--delete-genres : DELETE ALL genres}';
+        {--delete-genres : DELETE ALL genres}
+        {--delete-credits : DELETE ALL credits}';
 
     protected $description = 'Import or manage Movies and Genres from TheMovieDB';
 
@@ -77,6 +78,27 @@ class ImportMoviesFromTMDB extends Command
             $count = Genre::count();
             Genre::truncate();
             $this->info("Deleted {$count} genres.");
+            $didSomething = true;
+        }
+
+        if ($this->option('delete-genres')) {
+            $this->confirmDanger('genres');
+            $count = Genre::count();
+            Genre::truncate();
+            $this->info("Deleted {$count} genres.");
+            $didSomething = true;
+        }
+        
+        if ($this->option('delete-credits')) {
+            $this->confirmDanger('credits');
+            
+            $countPeople = \DB::table('people')->count();
+            \DB::table('people')->truncate();
+
+            $countPivot = \DB::table('movie_person')->count();
+            \DB::table('movie_person')->truncate();
+            
+            $this->info("Deleted {$countPeople} people and {$countPivot} records from movie_person.");
             $didSomething = true;
         }
 

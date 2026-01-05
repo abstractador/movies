@@ -40,4 +40,16 @@ return [
         'url' => env('TMDB_API_URL', 'https://api.themoviedb.org/3'),
     ],
 
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+    ],
+
+    'pinecone' => [
+        'key' => env('PINECONE_API_KEY'),
+        'url' => env('PINECONE_API_URL'),
+        'environment' => env('PINECONE_ENVIRONMENT'),
+        'index' => env('PINECONE_INDEX'),
+        'region' => env('PINECONE_REGION'),
+    ],
+
 ];

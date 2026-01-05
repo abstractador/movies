@@ -36,7 +36,7 @@ function addTypingIndicator() {
             AI
         </div>
         <div class="bg-slate-100 rounded-2xl px-4 py-3 text-sm text-slate-500">
-            AI is thinking…
+            AI is thinkingâ€¦
         </div>
     `;
 
@@ -58,7 +58,7 @@ function addAIMessage(text) {
             AI
         </div>
         <div class="bg-slate-100 rounded-2xl px-4 py-3 max-w-[80%]">
-            <p class="text-sm"></p>
+            <p class="text-sm whitespace-pre-line"></p>
         </div>
     `;
 
@@ -67,7 +67,26 @@ function addAIMessage(text) {
     scrollToBottom();
 }
 
-form.addEventListener('submit', (e) => {
+async function sendToApi(message) {
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document
+                .querySelector('meta[name="csrf-token"]')
+                ?.getAttribute('content'),
+        },
+        body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) {
+        throw new Error('API request failed');
+    }
+
+    return response.json();
+}
+
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const text = input.value.trim();
@@ -78,12 +97,60 @@ form.addEventListener('submit', (e) => {
     input.focus();
 
     addTypingIndicator();
+    startAIProgress();
 
-    // Simulated AI response (replace with real API call next)
-    setTimeout(() => {
+    try {
+        
+        const data = await sendToApi(text);
+
+        removeTypingIndicator();
+        stopAIProgress();
+
+        addAIMessage(
+            data.answer || 'Sorry, I could not find a good answer.'
+        );
+    } catch (err) {
+        console.error(err);
         removeTypingIndicator();
         addAIMessage(
-            "Nice choice! Based on that, I’d recommend Arrival, Ad Astra, and Solaris. Want something faster-paced or more philosophical?"
+            'âš ï¸ Something went wrong while talking to Movies AI. Please try again.'
         );
-    }, 1200);
+    }
 });
+
+const progressWrapper = document.getElementById('aiProgressWrapper');
+const progressBar = document.getElementById('aiProgressBar');
+
+let progressInterval = null;
+
+function startAIProgress() {
+    progressWrapper.classList.remove('hidden');
+    progressBar.style.width = '10%';
+    progressBar.textContent = '';
+
+    let progress = 10;
+
+    progressInterval = setInterval(() => {
+        // Slowly advance but never reach 100%
+        progress += Math.random() * 10;
+        if (progress > 85) progress = 85;
+
+        progressBar.style.width = progress + '%';
+    }, 400);
+}
+
+function stopAIProgress() {
+    if (progressInterval) {
+        clearInterval(progressInterval);
+        progressInterval = null;
+    }
+
+    progressBar.style.width = '100%';
+    progressBar.textContent = 'Done';
+
+    setTimeout(() => {
+        progressWrapper.classList.add('hidden');
+        progressBar.style.width = '0%';
+    }, 300);
+}
+

@@ -109,7 +109,7 @@ class TMDBService
      * @param int $maxPages
      * @return int
      */
-    public function importAllMovies(int $maxPages = 500): int
+    public function importAllMovies(int $maxPages = 100): int
     {
         $imported = 0;
         
@@ -203,6 +203,8 @@ class TMDBService
             'api_key' => $this->apiKey,
             'language' => 'en-US',
         ])->throw();
+        
+        sleep(3);
 
         return $response->json();
     }

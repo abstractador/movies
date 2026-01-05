@@ -9,9 +9,23 @@ use Illuminate\Http\RedirectResponse;
 
 class MovieController extends Controller
 {
+    /**
+     * Datatable for movies
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function datatable(Request $request)
     {
         $query = Movie::query();
+
+        // Genre filter
+        if ($genre = $request->input('genre')) {
+            $query->whereRaw(
+                'genre_ids @> ?::jsonb',
+                [json_encode([(int) $genre])]
+            );
+        }
 
         // Search
         if ($search = $request->input('search.value')) {
@@ -43,7 +57,6 @@ class MovieController extends Controller
         $data = $movies->map(function ($movie) {
             return [
                 $movie->id,
-                //e($movie->title),
                 view('admin.movies.partials.title', compact('movie'))->render(),
                 optional($movie->release_date)->format('Y-m-d'),
                 $movie->vote_average,
