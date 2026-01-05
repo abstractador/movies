@@ -6,11 +6,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
+    /**
+     * Show the admin login form
+     * 
+     * @return \Illuminate\View\View
+     */
     public function showLogin()
     {
         return view('admin.login');
     }
-
+    /**
+     * Handle admin login
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -28,6 +38,12 @@ class AuthController
         ]);
     }
 
+    /**
+     * Handle admin logout
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();

@@ -20,6 +20,12 @@ class OpenAIEmbeddingService
         ]);
     }
 
+    /**
+     * Generate embedding for the given text
+     * 
+     * @param string $text
+     * @return array
+     */
     public function embed(string $text): array
     {
         $response = $this->client->post('embeddings', [

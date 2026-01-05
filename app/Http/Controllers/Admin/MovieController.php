@@ -72,11 +72,23 @@ class MovieController extends Controller
         ]);
     }
     
+    /**
+     * View movie details
+     * 
+     * @param \App\Models\Movie $movie
+     * @return \Illuminate\View\View
+     */
     public function view(Movie $movie)
     {
         return view('admin.movies.partials.view', compact('movie'));
     }
     
+    /**
+     * Delete a movie
+     * 
+     * @param \App\Models\Movie $movie
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Movie $movie): RedirectResponse
     {
         $movie->delete();

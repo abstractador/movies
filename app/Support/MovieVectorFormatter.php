@@ -6,6 +6,12 @@ use App\Models\Movie;
 
 class MovieVectorFormatter
 {
+    /**
+     * Format movie details as plain text
+     * 
+     * @param \App\Models\Movie $movie
+     * @return string
+     */
     public static function toText(Movie $movie): string
     {
         $cast = $movie->people

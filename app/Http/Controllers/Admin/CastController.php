@@ -9,11 +9,22 @@ use Illuminate\Http\RedirectResponse;
 
 class CastController extends Controller
 {
+    /**
+     * Display the cast management page
+     * 
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('admin.cast.index');
     }
 
+    /**
+     * DataTables AJAX request
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function datatable(Request $request)
     {
         $query = Person::query();

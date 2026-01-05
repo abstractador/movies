@@ -9,11 +9,22 @@ use Illuminate\Http\RedirectResponse;
 
 class GenresController extends Controller
 {
+    /**
+     * Display the genres management page
+     * 
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('admin.genres.index');
     }
 
+    /**
+     * DataTables AJAX request
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function datatable(Request $request)
     {
         $query = Genre::query();
@@ -61,6 +72,12 @@ class GenresController extends Controller
         ]);
     }
     
+    /**
+     * Delete a genre
+     * 
+     * @param \App\Models\Genre $genre
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Genre $genre): RedirectResponse
     {
         $genre->delete();
