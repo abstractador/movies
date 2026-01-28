@@ -12,7 +12,7 @@
 
 <!-- Header -->
 <header class="border-b border-slate-200 shrink-0">
-    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+    <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <img src="/images/logo.png" alt="Movies AI" style="height:38px;width:auto;" />
         </div>
